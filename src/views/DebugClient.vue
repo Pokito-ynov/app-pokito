@@ -46,9 +46,10 @@
 </template>
 
 <script setup lang="ts">
- /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { computed, ref } from 'vue'
 import { io, Socket } from 'socket.io-client'
+
 const socket = ref<Socket | null>(null)
 const pseudo = ref('Guest1')
 const connected = ref(false)
@@ -81,8 +82,8 @@ function connect() {
   socket.value = io()
   socket.value.on('connect', () => {
     connected.value = true
-    log(`Connected with ID: ${socket.value!.id}`)
-    socket.value!.emit('guest:join', { pseudo: pseudo.value, avatar: 'default' })
+    log(`Connected with ID: ${socket.value?.id}`)
+    socket.value?.emit('guest:join', { pseudo: pseudo.value, avatar: 'default' })
   })
 
   socket.value.on('guest:joined', (data: any) => {
